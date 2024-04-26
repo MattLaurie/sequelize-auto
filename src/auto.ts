@@ -5,7 +5,7 @@ import { AutoBuilder } from "./auto-builder";
 import { AutoGenerator } from "./auto-generator";
 import { AutoRelater } from "./auto-relater";
 import { AutoWriter } from "./auto-writer";
-import { dialects } from "./dialects/dialects";
+import { getDialect, isSupportedDialect } from './dialects/dialects';
 import { AutoOptions, TableData } from "./types";
 
 export class SequelizeAuto {
@@ -45,6 +45,9 @@ export class SequelizeAuto {
       this.options.noWrite = true;
     }
 
+    if (!isSupportedDialect(this.sequelize.getDialect())) {
+      throw new Error(`Unsupported Sequelize dialect: "${this.sequelize.getDialect()}"`);
+    }
   }
 
   async run(): Promise<TableData> {
@@ -72,7 +75,7 @@ export class SequelizeAuto {
   }
 
   generate(tableData: TableData) {
-    const dialect = dialects[this.sequelize.getDialect() as Dialect];
+    const dialect = getDialect(this.sequelize.getDialect());
     const generator = new AutoGenerator(tableData, dialect, this.options);
     return generator.generateText();
   }
