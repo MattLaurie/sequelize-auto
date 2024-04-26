@@ -723,10 +723,10 @@ export class AutoGenerator {
     if (this.isArray(fieldType)) {
       const eltype = this.getTypeScriptFieldType(fieldObj, "elementType");
       jsType = eltype + '[]';
-    } else if (this.isNumber(fieldType)) {
-      jsType = 'number';
     } else if (this.isBoolean(fieldType)) {
       jsType = 'boolean';
+    } else if (this.isNumber(fieldType)) {
+      jsType = 'number';
     } else if (this.isDate(fieldType)) {
       jsType = 'Date';
     } else if (this.isString(fieldType)) {
@@ -799,7 +799,7 @@ export class AutoGenerator {
   }
 
   private isBoolean(fieldType: string): boolean {
-    return /^(boolean|bit)/.test(fieldType);
+    return /^(boolean|bit|tinyint\(1\))/.test(fieldType);
   }
 
   private isDate(fieldType: string): boolean {
