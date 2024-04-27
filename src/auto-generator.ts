@@ -342,7 +342,7 @@ export class AutoGenerator {
             defaultVal = defaultVal.replace(/^[(]/, '').replace(/[)]$/, '');
           }
 
-          if (field_type === 'bit(1)' || field_type === 'bit' || field_type === 'boolean') {
+          if (field_type === 'bit(1)' || field_type === 'bit' || field_type === 'boolean' || field_type === 'tinyint(1)') {
             // convert string to boolean
             val_text = /1|true/i.test(defaultVal) ? "true" : "false";
 
