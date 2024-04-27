@@ -157,6 +157,8 @@ export interface AutoOptions {
   noIndexes?: boolean;
   /** Whether to skip writing the init-models file */
   noInitModels?: boolean;
+  /** Whether to include typescript mixin declarations */
+  noMixins?: boolean;
   /** Whether to skip writing the files */
   noWrite?: boolean;
   /** Database password */

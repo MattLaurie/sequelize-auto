@@ -77,6 +77,8 @@ Options:
 --useDefine              Use `sequelize.define` instead of `init` for es6|esm|ts
 --singularize, --sg      Singularize model and file names from plural table
                           names                                      [boolean]
+--noMixins               Prevent creating Sequelize Mixins in the Typescript
+                         models                                      [boolean]
 ```
 
 > On Windows, provide the path to sequelize-auto: `node_modules\.bin\sequelize-auto [args]`

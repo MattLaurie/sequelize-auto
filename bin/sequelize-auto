@@ -106,6 +106,10 @@ const argv = require('yargs')
     description: 'Prevent writing the init-models file',
     type: 'boolean'
   })
+  .option('noMixins', {
+    description: 'Prevent creating Sequelize Mixins in the Typescript models',
+    type: 'boolean'
+  })
   .option('noWrite', {
     description: 'Prevent writing the models to disk',
     type: 'boolean',
@@ -212,6 +216,7 @@ async function readPassword() {
   configFile.caseProp = argv.caseProp || configFile.caseProp || 'o';
   configFile.noAlias = argv.noAlias || configFile.noAlias || false;
   configFile.noInitModels = argv.noInitModels || configFile.noInitModels || false;
+  configFile.noMixins = argv.noMixins || configFile.noMixins || false;
   configFile.noWrite = argv.noWrite || configFile.noWrite || false;
   configFile.views = argv.views || configFile.views || false;
   configFile.singularize = argv.singularize || configFile.singularize || false;
