@@ -26,7 +26,9 @@ export class AutoWriter {
     spaces?: boolean;
     indentation?: number;
   };
+  tableData: TableData;
   constructor(tableData: TableData, options: AutoOptions) {
+    this.tableData = tableData;
     this.tableText = tableData.text as { [name: string]: string };
     this.foreignKeys = tableData.foreignKeys;
     this.relations = tableData.relations;
@@ -41,6 +43,15 @@ export class AutoWriter {
     }
 
     mkdirp.sync(path.resolve(this.options.directory || "./models"));
+
+    if (this.options.lang === "json") {
+      const jsonFilePath = path.join(this.options.directory, "schema.json");
+      const writeFile = util.promisify(fs.writeFile);
+      // TODO create a more useful and stable external format
+      const schema = structuredClone(this.tableData); // TODO do not do this
+      delete schema.text;
+      return writeFile(path.resolve(jsonFilePath), JSON.stringify(schema, null, 2));
+    }
 
     const tables = _.keys(this.tableText);
 
